@@ -1,0 +1,269 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../iron-image/iron-image.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
+<link rel="import" href="odl-testimonial-icon.html">
+
+
+<!--
+`odl-testimonial`
+an ODL element for visualizing testimonials
+
+@demo demo/index.html
+-->
+
+<dom-module id="odl-testimonial">
+  <template>
+    <style>
+      :host {
+        display: block;
+        font-family: sans-serif;
+        color: darkslategray;
+      }
+
+      paper-card {
+        display: inline-flex;
+      }
+
+      iron-image {
+        display: block;
+        width: 150px;
+        height: 100%;
+        border-right: solid 5px #E2801E;
+      }
+
+      iron-icon {
+        --iron-icon-height: 15px;
+        --iron-icon-width: 15px;
+        --iron-icon-fill-color: darkslategray;
+      }
+
+      @media screen and (max-width: 850px) {
+        paper-card {
+          display: flex;
+          flex-wrap: wrap;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        iron-image {
+          display: block;
+          border-radius: 50%;
+          margin-top: 25px;
+          width: 200px;
+          height: 200px;
+          border: solid 5px #E2801E;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        .image {
+          margin-left: auto;
+          margin-right: auto;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        .arrow_right {
+          display: none;
+        }
+      }
+
+      @media screen and (max-width: 850px) {
+        .name, .position {
+          text-align: center;
+        }
+      }
+
+      .wrap {
+        margin: 15px;
+      }
+
+      .testimonial {
+        line-height: 1.5em;
+        font-size: 16px;
+        font-style: italic;
+      }
+
+      .name {
+        font-size: 21px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .position {
+        font-size: 14px;
+        margin-top: 5px;
+      }
+
+      .arrow_right {
+        width: 0;
+        height: 0;
+        border-top: 15px solid transparent;
+        border-bottom: 15px solid transparent;
+        border-left: 15px solid #E2801E;
+        position: relative;
+        top: 55px;
+      }
+
+      #quotestart {
+        display: inline-flex;
+        transform: rotateY(180deg);
+      }
+
+      #quoteend {
+        display: inline-flex;
+      }
+    </style>
+
+
+    <paper-card elevation="1">
+
+      <div class="image">
+        <iron-image src="[[image]]" sizing="cover"></iron-image>
+      </div>
+      <div class="arrow_right"></div>
+      <div class="wrap">
+        <div class="testimonial">
+          <iron-icon id="quotestart" icon="odl:format-quote"></iron-icon>
+          <slot></slot>
+          <iron-icon id="quoteend" icon="odl:format-quote"></iron-icon>
+        </div>
+        <div class="name">[[name]]</div>
+        <div class="position">[[position]]</div>
+      </div>
+    </paper-card>
+
+
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'odl-testimonial',
+
+      behaviors: [
+        HAXBehaviors.PropertiesBehaviors
+      ],
+
+      properties: {
+        image: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        testimonial: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        name: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+        position: {
+          type: String,
+          value: '',
+          reflectToAttribute: true,
+        },
+      },
+
+      /**
+      * Attached to the DOM, now fire.
+      */
+      attached: function () {
+        // Establish hax property binding
+        let props = {
+          'canScale': true,
+          'canPosition': true,
+          'canEditSource': true,
+          'gizmo': {
+            'title': 'ODL-Testimonial',
+            'description': 'Add a testimonial',
+            'icon': 'editor:format-quote',
+            'color': 'orange',
+            'groups': ['Content', 'Presentation'],
+            'handles': [
+              {
+                'Image': 'image',
+                'Quote': 'testimonial',
+                'Name': 'name',
+                'Position': 'position',
+
+              }
+            ],
+            'meta': {
+              'author': 'EberlyODL'
+            }
+          },
+          'settings': {
+            'quick': [
+              {
+                'property': 'image',
+                'title': 'Image',
+                'description': 'Adds image to testimonial',
+                'inputMethod': 'textfield',
+                'icon': 'editor:insert-photo',
+              },
+              {
+                'property': 'name',
+                'title': 'Full Name',
+                'description': 'Credit the person making the testimonial',
+                'inputMethod': 'textfield',
+                'icon': 'account-circle',
+              },
+              {
+                'property': 'position',
+                'title': 'Position or Job Title',
+                'description': 'List the position and job title',
+                'inputMethod': 'textfield',
+                'icon': 'icons:work',
+              },
+            ],
+            'configure': [
+              {
+                'property': 'image',
+                'title': 'Image',
+                'description': 'Adds image to testimonial',
+                'inputMethod': 'textfield',
+                'icon': 'editor:insert-photo',
+              },
+              {
+                'property': 'name',
+                'title': 'Full Name',
+                'description': 'Credit the person making the testimonial',
+                'inputMethod': 'textfield',
+                'icon': 'account-circle',
+              },
+              {
+                'slot': '',
+                'title': 'Insert your testimonial:',
+                'description': 'This is where you enter your testimonial.',
+                'inputMethod': 'code-editor',
+                'required': true,
+              },
+              {
+                'property': 'position',
+                'title': 'Position or Job Title',
+                'description': 'List the position and job title',
+                'inputMethod': 'textfield',
+                'icon': 'icons:work',
+              },
+
+            ],
+            'advanced': [
+            ]
+          }
+        };
+        this.setHaxProperties(props);
+      },
+
+
+
+    });
+  </script>
+</dom-module>
