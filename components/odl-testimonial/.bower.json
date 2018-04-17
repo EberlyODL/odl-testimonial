@@ -1,0 +1,28 @@
+{
+  "name": "odl-testimonial",
+  "description": "an ODL element for visualizing testimonials",
+  "main": "odl-testimonial.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "paper-card": "PolymerElements/paper-card#^2.1.0",
+    "iron-image": "PolymerElements/iron-image#^2.2.1",
+    "hax-body-behaviors": "LRNWebComponents/hax-body-behaviors#^1.10.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "web-component-tester": "^6.0.0-prerelease.5",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  },
+  "homepage": "https://github.com/EberlyODL/odl-testimonial",
+  "_release": "6ea306a486",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "6ea306a48666d917733fdf1155dbc333291b6f5a"
+  },
+  "_source": "https://github.com/EberlyODL/odl-testimonial.git",
+  "_target": "master",
+  "_originalSource": "EberlyODL/odl-testimonial",
+  "_direct": true
+}
